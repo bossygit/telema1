@@ -106,37 +106,29 @@ export function Navigation() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-lg"
-          : "bg-card"
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-card/95 backdrop-blur-md shadow-lg"
+        : "bg-card"
+        }`}
     >
       <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
             <div className="h-10 lg:h-12 w-auto">
-              <img 
-                src="/images/logo.png" 
-                alt="Fondation Téléma" 
+              <img
+                src="/images/logo.png"
+                alt="Fondation Téléma"
                 className="h-full object-contain"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-black font-bold text-[11px] lg:text-sm tracking-[0.25em] uppercase leading-none mb-1.5 transition-colors">
-                Fondation
-              </span>
-              <span className="text-black font-black text-2xl lg:text-3xl tracking-tighter uppercase leading-none drop-shadow-sm">
-                Telema
-              </span>
-            </div>
+
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navLinks.map((link) => (
-              <div 
+              <div
                 key={link.label}
                 className="relative group py-8"
                 onMouseEnter={() => setActiveDropdown(link.label)}
@@ -182,7 +174,7 @@ export function Navigation() {
               href="#contact"
               className="bg-primary text-primary-foreground px-5 py-2 rounded-lg font-bold text-[12px] uppercase tracking-widest hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20 shadow-sm whitespace-nowrap"
             >
-              Postuler
+              Faire un don
             </a>
           </div>
 
@@ -238,7 +230,7 @@ export function Navigation() {
               href="#contact"
               className="bg-primary text-primary-foreground px-6 py-4 rounded-xl font-bold text-sm text-center uppercase tracking-widest hover:bg-primary/90 transition-colors mt-4"
             >
-              Postuler
+              Faire un don
             </a>
           </div>
         </div>

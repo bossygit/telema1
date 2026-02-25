@@ -39,7 +39,7 @@ export function NewsletterSection() {
       <div className="mx-auto max-w-7xl px-4">
         <div
           data-animate
-          className="opacity-0 relative bg-primary rounded-3xl p-10 lg:p-16 overflow-hidden"
+          className="opacity-0 relative bg-destructive rounded-3xl p-10 lg:p-16 overflow-hidden"
           style={{ animationDelay: "0.1s" }}
         >
           {/* Decorative elements */}

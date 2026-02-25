@@ -2,15 +2,33 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Phone, Mail } from "lucide-react"
+import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react"
 
 const navLinks = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Mission", href: "#mission" },
-  { label: "Programmes", href: "#programmes" },
-  { label: "Temoignages", href: "#temoignages" },
-  { label: "Partenaires", href: "#partenaires" },
-  { label: "Contact", href: "#contact" },
+  {
+    label: "La Fondation",
+    href: "#",
+    submenu: [
+      { label: "Présentation", href: "#mission" },
+      { label: "L’équipe", href: "#mission" },
+      { label: "Nos espaces", href: "#programmes" },
+      { label: "Documentation", href: "#" },
+    ],
+  },
+  { label: "L’Incubateur", href: "#programmes" },
+  { label: "Nos Bénéficiaires", href: "#temoignages" },
+  { label: "Appel à Projets", href: "#contact" },
+  {
+    label: "Nous Rejoindre",
+    href: "#",
+    submenu: [
+      { label: "Recrutement", href: "#contact" },
+      { label: "Contribuer en tant qu’expert", href: "#contact" },
+      { label: "Devenir partenaire", href: "#partenaires" },
+      { label: "Faire un don", href: "#contact" },
+    ],
+  },
+  { label: "Actualités", href: "#articles" },
 ]
 
 export function TopBar() {
@@ -76,6 +94,7 @@ export function TopBar() {
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,10 +112,10 @@ export function Navigation() {
           : "bg-card"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-[1600px] px-6 lg:px-10">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 shrink-0">
             <div className="h-10 lg:h-12 w-auto">
               <img 
                 src="/images/logo.png" 
@@ -115,15 +134,45 @@ export function Navigation() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-4 xl:gap-6">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-black font-medium text-sm transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all hover:after:w-full"
+              <div 
+                key={link.label}
+                className="relative group py-8"
+                onMouseEnter={() => setActiveDropdown(link.label)}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                {link.label}
-              </a>
+                {link.submenu ? (
+                  <button className="flex items-center gap-1 text-black font-bold text-[11px] xl:text-[12px] uppercase tracking-wider transition-colors hover:text-primary whitespace-nowrap">
+                    {link.label}
+                    <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180' : ''}`} />
+                  </button>
+                ) : (
+                  <a
+                    href={link.href}
+                    className="text-black font-bold text-[11px] xl:text-[12px] uppercase tracking-wider transition-colors hover:text-primary relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full whitespace-nowrap"
+                  >
+                    {link.label}
+                  </a>
+                )}
+
+                {/* Dropdown Menu */}
+                {link.submenu && activeDropdown === link.label && (
+                  <div className="absolute top-full left-[-20px] w-64 bg-white shadow-2xl rounded-2xl p-4 border border-border/50 animate-fade-in-up origin-top">
+                    <div className="flex flex-col gap-1">
+                      {link.submenu.map((subItem) => (
+                        <a
+                          key={subItem.label}
+                          href={subItem.href}
+                          className="px-4 py-3 text-[12px] font-bold text-black/60 uppercase tracking-widest hover:text-primary hover:bg-primary/5 rounded-xl transition-all"
+                        >
+                          {subItem.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -131,7 +180,7 @@ export function Navigation() {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="#contact"
-              className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors"
+              className="bg-primary text-primary-foreground px-5 py-2 rounded-lg font-bold text-[12px] uppercase tracking-widest hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20 shadow-sm whitespace-nowrap"
             >
               Postuler
             </a>
@@ -150,21 +199,44 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="lg:hidden bg-card border-t border-border">
-          <div className="px-4 py-6 flex flex-col gap-4">
+        <div className="lg:hidden bg-card border-t border-border overflow-y-auto max-h-[calc(100vh-80px)]">
+          <div className="px-4 py-6 flex flex-col gap-2">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-foreground hover:text-primary font-medium text-base py-2 transition-colors"
-              >
-                {link.label}
-              </a>
+              <div key={link.label} className="border-b border-border/50 last:border-0 pb-2 mb-2">
+                {link.submenu ? (
+                  <div className="flex flex-col">
+                    <div className="flex items-center justify-between py-2">
+                      <span className="text-black font-bold text-sm uppercase tracking-widest">
+                        {link.label}
+                      </span>
+                    </div>
+                    <div className="pl-4 flex flex-col gap-2 mt-1 border-l-2 border-primary/20">
+                      {link.submenu.map((subItem) => (
+                        <a
+                          key={subItem.label}
+                          href={subItem.href}
+                          onClick={() => setIsOpen(false)}
+                          className="text-black/60 hover:text-primary font-bold text-xs uppercase tracking-widest py-2 transition-colors"
+                        >
+                          {subItem.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-black hover:text-primary font-bold text-sm uppercase tracking-widest block py-3 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                )}
+              </div>
             ))}
             <a
               href="#contact"
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold text-sm text-center hover:bg-primary/90 transition-colors mt-2"
+              className="bg-primary text-primary-foreground px-6 py-4 rounded-xl font-bold text-sm text-center uppercase tracking-widest hover:bg-primary/90 transition-colors mt-4"
             >
               Postuler
             </a>

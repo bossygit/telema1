@@ -4,13 +4,11 @@ import { useEffect, useRef } from "react"
 import Image from "next/image"
 
 const partners = [
-  { name: "Bioforce", initials: "BF" },
-  { name: "BCH", initials: "BCH" },
-  { name: "JCECB", initials: "JC" },
-  { name: "ESSOR", initials: "ES" },
-  { name: "ACPCE", initials: "AC" },
-  { name: "FIGA", initials: "FI", logo: "/images/5.jpg" },
-  { name: "CAPPED", initials: "CP", logo: "/images/3.jpg" },
+  { name: "Partner 1", logo: "/images/6.png" },
+  { name: "Partner 2", logo: "/images/5.jpg" },
+  { name: "Partner 3", logo: "/images/3.jpg" },
+  { name: "Partner 4", logo: "/images/7.png" },
+  { name: "Partner 5", logo: "/images/39.png" },
 ]
 
 export function PartnersSection() {
@@ -37,64 +35,48 @@ export function PartnersSection() {
     <section
       id="partenaires"
       ref={sectionRef}
-      className="py-24 lg:py-32 bg-secondary"
+      className="py-24 bg-white overflow-hidden"
     >
       <div className="mx-auto max-w-7xl px-4">
         <div className="text-center mb-16">
           <span
             data-animate
-            className="opacity-0 text-accent font-semibold text-sm uppercase tracking-widest"
-            style={{ animationDelay: "0.1s" }}
+            className="text-primary font-bold text-xs uppercase tracking-[0.4em] block mb-4"
           >
-            Ecosysteme
+            Ecosystème
           </span>
           <h2
             data-animate
-            className="opacity-0 mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground font-serif leading-tight text-balance"
-            style={{ animationDelay: "0.2s" }}
+            className="text-4xl font-black text-black uppercase tracking-tight"
           >
-            Nos partenaires
+            Ils nous font confiance
           </h2>
-          <p
-            data-animate
-            className="opacity-0 mt-4 text-muted-foreground text-lg max-w-2xl mx-auto text-pretty"
-            style={{ animationDelay: "0.3s" }}
-          >
-            Ensemble, nous construisons un ecosysteme favorable a
-            {"l'entrepreneuriat"} des jeunes au Congo.
-          </p>
         </div>
 
-        {/* Partner logos */}
-        <div
-          data-animate
-          className="opacity-0 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-6"
-          style={{ animationDelay: "0.4s" }}
-        >
-          {partners.map((partner) => (
-            <div
-              key={partner.name}
-              className="group bg-card rounded-2xl p-6 flex flex-col items-center justify-center gap-3 border border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="relative h-20 w-full flex items-center justify-center bg-primary/5 group-hover:bg-primary/10 rounded-xl transition-colors overflow-hidden">
-                {partner.logo ? (
+        {/* Partner slider container */}
+        <div className="relative mt-12 w-full overflow-hidden">
+          {/* Gradient Masks for smooth fading edges */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          
+          <div className="animate-scroll flex gap-24 py-8 items-center">
+            {/* Double the array for seamless infinite scroll (translateX -50% trick) */}
+            {[...partners, ...partners].map((partner, index) => (
+              <div
+                key={`${partner.name}-${index}`}
+                className="relative h-32 w-[350px] flex-shrink-0 transition-all duration-500 opacity-100 flex items-center justify-center translate-z-0"
+              >
+                <div className="relative w-full h-full">
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     fill
-                    className="object-contain p-2"
+                    className="object-contain"
                   />
-                ) : (
-                  <span className="text-primary font-bold text-xl font-serif">
-                    {partner.initials}
-                  </span>
-                )}
+                </div>
               </div>
-              <span className="text-foreground font-semibold text-xs text-center">
-                {partner.name}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

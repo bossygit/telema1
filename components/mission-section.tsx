@@ -158,13 +158,13 @@ export function MissionSection() {
                 <div
                   key={pillar.title}
                   data-animate
-                  className="opacity-0 group p-6 rounded-2xl bg-secondary/50 hover:bg-secondary transition-colors border border-transparent hover:border-border/50"
+                  className="opacity-0 group p-6 rounded-3xl glass-card hover:bg-white transition-all duration-500 border border-white/50 hover:border-primary/20 hover:shadow-2xl hover:-translate-y-1"
                   style={{ animationDelay: `${0.3 + index * 0.15}s` }}
                 >
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center mb-4 transition-colors">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="h-14 w-14 rounded-2xl bg-primary/5 group-hover:bg-primary group-hover:rotate-12 flex items-center justify-center mb-6 transition-all duration-500">
+                    <Icon className="h-6 w-6 text-primary group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="font-bold text-foreground text-lg mb-2">
+                  <h3 className="font-bold text-foreground text-xl mb-3">
                     {pillar.title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">

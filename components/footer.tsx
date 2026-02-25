@@ -3,26 +3,32 @@ import { Phone, Mail, MapPin } from "lucide-react"
 
 const footerLinks = {
   fondation: [
-    { label: "Presentation", href: "#mission" },
-    { label: "L'equipe", href: "#mission" },
-    { label: "L'incubateur", href: "#programmes" },
+    { label: "Présentation", href: "#mission" },
+    { label: "L’équipe", href: "#mission" },
+    { label: "Nos espaces", href: "#programmes" },
     { label: "Documentation", href: "#" },
   ],
   rejoindre: [
-    { label: "Faire un don", href: "#contact" },
-    { label: "Devenir partenaire", href: "#partenaires" },
-    { label: "Contribuer en tant qu'expert", href: "#contact" },
     { label: "Recrutement", href: "#contact" },
+    { label: "Contribuer en tant qu’expert", href: "#contact" },
+    { label: "Devenir partenaire", href: "#partenaires" },
+    { label: "Faire un don", href: "#contact" },
+  ],
+  opportunites: [
+    { label: "L’Incubateur", href: "#programmes" },
+    { label: "Nos Bénéficiaires", href: "#temoignages" },
+    { label: "Appel à Projets", href: "#contact" },
+    { label: "Actualités", href: "#articles" },
   ],
 }
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-[#1A1A1A] text-[#FFFFFF]">
+    <footer id="contact" className="bg-primary text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:py-20">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-12 lg:gap-8">
           {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-3 xl:col-span-1">
             <div className="flex items-center gap-3 mb-6">
               <div className="relative h-12 w-12 rounded-xl bg-white flex items-center justify-center overflow-hidden">
                 <Image
@@ -36,12 +42,12 @@ export function Footer() {
                 <span className="text-white font-bold text-lg leading-tight tracking-tight uppercase">
                   Fondation
                 </span>
-                <span className="text-primary font-bold text-lg leading-tight tracking-tight uppercase">
+                <span className="text-accent font-bold text-lg leading-tight tracking-tight uppercase">
                   Telema
                 </span>
               </div>
             </div>
-            <p className="text-[#FFFFFF]/60 text-sm leading-relaxed max-w-xs">
+            <p className="text-white/70 text-sm leading-relaxed max-w-xs">
               Faciliter {"l'acces"} des jeunes congolais aux services techniques
               et financiers pour favoriser {"l'entrepreneuriat"} en Republique du
               Congo.
@@ -54,7 +60,7 @@ export function Footer() {
                   <a
                     key={platform}
                     href="#"
-                    className="h-10 w-10 rounded-lg bg-[#FFFFFF]/10 flex items-center justify-center text-[#FFFFFF]/60 hover:bg-primary hover:text-primary-foreground transition-colors"
+                    className="h-10 w-10 rounded-lg bg-white/10 flex items-center justify-center text-white/70 hover:bg-accent hover:text-black transition-all duration-300"
                     aria-label={platform}
                   >
                     <span className="text-xs font-bold">
@@ -68,7 +74,7 @@ export function Footer() {
 
           {/* Foundation links */}
           <div>
-            <h3 className="text-[#FFFFFF] font-bold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-6">
               La Fondation
             </h3>
             <ul className="flex flex-col gap-3">
@@ -76,7 +82,26 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#FFFFFF]/60 hover:text-[#D4A843] text-sm transition-colors"
+                    className="text-white/70 hover:text-accent text-sm transition-colors font-medium"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Opportunités links */}
+          <div>
+            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-6">
+              Nos Actions
+            </h3>
+            <ul className="flex flex-col gap-3">
+              {footerLinks.opportunites.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-white/70 hover:text-accent text-sm transition-colors font-medium"
                   >
                     {link.label}
                   </a>
@@ -87,7 +112,7 @@ export function Footer() {
 
           {/* Join links */}
           <div>
-            <h3 className="text-[#FFFFFF] font-bold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-6">
               Nous rejoindre
             </h3>
             <ul className="flex flex-col gap-3">
@@ -95,7 +120,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#FFFFFF]/60 hover:text-[#D4A843] text-sm transition-colors"
+                    className="text-white/70 hover:text-accent text-sm transition-colors font-medium"
                   >
                     {link.label}
                   </a>
@@ -106,17 +131,17 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-[#FFFFFF] font-bold text-sm uppercase tracking-wider mb-6">
+            <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-6">
               Contact
             </h3>
             <ul className="flex flex-col gap-4">
               <li>
                 <a
                   href="tel:+24206710414"
-                  className="flex items-start gap-3 text-[#FFFFFF]/60 hover:text-[#D4A843] text-sm transition-colors"
+                  className="flex items-start gap-3 text-white/70 hover:text-accent text-sm transition-colors group"
                 >
-                  <Phone className="h-4 w-4 mt-0.5 shrink-0" />
-                  <span>
+                  <Phone className="h-4 w-4 mt-0.5 shrink-0 text-accent group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">
                     +242 06 710 14 14
                     <br />
                     +242 04 411 57 36
@@ -126,15 +151,15 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:contact@fondationtelema.cg"
-                  className="flex items-start gap-3 text-[#FFFFFF]/60 hover:text-[#D4A843] text-sm transition-colors"
+                  className="flex items-start gap-3 text-white/70 hover:text-accent text-sm transition-colors group"
                 >
-                  <Mail className="h-4 w-4 mt-0.5 shrink-0" />
-                  <span>contact@fondationtelema.cg</span>
+                  <Mail className="h-4 w-4 mt-0.5 shrink-0 text-accent group-hover:scale-110 transition-transform" />
+                  <span className="font-medium">contact@fondationtelema.cg</span>
                 </a>
               </li>
-              <li className="flex items-start gap-3 text-[#FFFFFF]/60 text-sm">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
-                <span>
+              <li className="flex items-start gap-3 text-white/70 text-sm">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
+                <span className="font-medium">
                   Boulevard Denis Sassou N'Guesso,
                   <br />
                   Immeuble CAP INFO, Brazzaville
@@ -145,21 +170,21 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-[#FFFFFF]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[#FFFFFF]/40 text-sm">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/40 text-sm">
             {"\u00A9"} {new Date().getFullYear()} Fondation TELEMA. Tous droits
             reserves.
           </p>
           <div className="flex items-center gap-6">
             <a
               href="#"
-              className="text-[#FFFFFF]/40 hover:text-[#FFFFFF]/60 text-sm transition-colors"
+              className="text-white/40 hover:text-white/60 text-sm transition-colors"
             >
               Mentions legales
             </a>
             <a
               href="#"
-              className="text-[#FFFFFF]/40 hover:text-[#FFFFFF]/60 text-sm transition-colors"
+              className="text-white/40 hover:text-white/60 text-sm transition-colors"
             >
               Politique de confidentialite
             </a>
